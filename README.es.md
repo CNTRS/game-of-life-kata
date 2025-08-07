@@ -1,19 +1,27 @@
-# TS-Starter 🚀 TypeScript Modern Template
+# Game of Life Kata 🎮 TypeScript
 
 [🇬🇧 English version](README.md)
 
-Template moderno y optimizado para TypeScript diseñado tanto para la práctica de katas como para el desarrollo de proyectos profesionales. Incluye las herramientas más actuales y rápidas del ecosistema JavaScript/TypeScript.
+Implementación del famoso "Juego de la Vida" de John Conway usando TypeScript moderno. Una kata perfecta para practicar TDD (Test Driven Development) y conceptos de programación funcional. Incluye una interfaz React para visualizar el juego en tiempo real.
 
 ## ✨ Características
 
-- **⚡ Ultra rápido**: Vitest, Biome, tsup y pnpm para máximo rendimiento
-- **🔧 Configuración mínima**: Todo configurado y listo para usar
-- **📦 Gestión moderna**: pnpm para eficiencia en dependencias
-- **🧪 Testing avanzado**: Vitest con coverage y UI
-- **🎯 Linting unificado**: Biome para linting y formateo en una herramienta
-- **📈 Versionado automático**: Changesets para releases profesionales
-- **🔄 Git hooks**: Pre-commit y pre-push automatizados
-- **🏗️ Build optimizado**: tsup con soporte para ESM/CJS
+- **⚡ Ultra rápido**: Vitest, Biome, Vite y pnpm para máximo rendimiento
+- **🧪 Testing avanzado**: Vitest con coverage y UI para TDD
+- **🎯 Linting unificado**: Biome para linting y formateo
+- **🎮 Interfaz interactiva**: React con visualización en tiempo real
+- **📱 Responsive**: Interfaz que se adapta a diferentes tamaños de pantalla
+- **🎨 Personalizable**: Fácil configuración de colores y velocidad
+
+## 📚 Sobre el Game of Life
+
+El Juego de la Vida de Conway es un autómata celular creado por el matemático John Conway en 1970. Se trata de un "juego de cero jugadores", donde la evolución está determinada por el estado inicial.
+
+### Reglas
+1. **Supervivencia**: Una célula viva con 2 o 3 vecinos vivos sobrevive
+2. **Muerte por aislamiento**: Una célula viva con menos de 2 vecinos muere
+3. **Muerte por sobrepoblación**: Una célula viva con más de 3 vecinos muere
+4. **Nacimiento**: Una célula muerta con exactamente 3 vecinos vivos nace
 
 ## 📋 Requisitos Previos
 
@@ -52,73 +60,35 @@ Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expr
 fnm use --install-if-missing
 ```
 
-## 🚀 Inicio Rápido
-
-### 1. Crear un nuevo proyecto
-
-```bash
-# Opción 1: Clonar el template
-git clone <repository-url> my-new-project
-cd my-new-project
-rm -rf .git && git init
-
-# Opción 2: Usar como template en GitHub
-# Click en "Use this template" en GitHub
-
-# Opción 3: Usar degit (recomendado)
-npx degit <username>/<template-repo> my-new-project
-cd my-new-project
-```
-
-### 2. Configurar el proyecto
-
-```bash
-# Instalar dependencias
-pnpm install
-
-# Configurar git hooks
-pnpm prepare
-
-# Verificar que todo funciona
-pnpm test
-```
-
-### 3. Personalizar
-
-```bash
-# Actualizar package.json con tu información
-# - name: nombre de tu proyecto
-# - description: descripción del proyecto
-# - author: tu información
-# - repository: URL del repositorio
-```
-
 ## 📁 Estructura del Proyecto
 
 ```
-my-project/
-├── .changeset/           # Configuración de changesets
-│   └── config.json
-├── .github/              # GitHub workflows (opcional)
-│   └── workflows/
-│       └── ci.yml
+game-of-life-kata/
 ├── src/                  # Código fuente
-│   ├── index.ts          # Punto de entrada principal
-│   └── __tests__/        # Tests
-│       └── example.test.ts
-├── dist/                 # Build output (generado)
-├── coverage/             # Coverage reports (generado)
-├── .gitignore           # Archivos ignorados por git
-├── .nvmrc               # Versión de Node.js
-├── biome.json           # Configuración de Biome
-├── package.json         # Dependencias y scripts
-├── pnpm-lock.yaml       # Lock file de pnpm
-├── README.md            # Este archivo en inglés
-├── README.es.md         # Este archivo
-├── tsconfig.json        # Configuración de TypeScript
-├── tsup.config.ts       # Configuración de build
-└── vitest.config.ts     # Configuración de tests
+│   ├── App.tsx           # Componente principal de React
+│   ├── main.tsx          # Punto de entrada de React
+│   ├── gameOfLife.ts     # 🎯 LÓGICA PRINCIPAL A IMPLEMENTAR
+│   ├── __tests__/        # Tests
+│   │   ├── gameOfLife.test.ts  # 🧪 Tests principales de la kata
+│   │   └── App.test.tsx        # Tests del componente App
+│   └── test/             # Configuración de testing
+│       ├── setup.ts      # Setup de testing
+│       └── vitest-setup.d.ts
+├── coverage/             # Reportes de coverage (generado)
+├── dist/                 # Build para producción (generado)
+├── index.html            # Template HTML de Vite
+├── package.json          # Dependencias y scripts
+├── tsconfig.json         # Configuración de TypeScript
+├── vite.config.ts        # Configuración de Vite
+├── vitest.config.ts      # Configuración de Vitest
+└── README.md             # Este archivo en inglés
 ```
+
+### 📝 Archivos clave para la kata
+
+- **`src/gameOfLife.ts`**: Aquí implementarás toda la lógica del juego
+- **`src/__tests__/gameOfLife.test.ts`**: Tests para guiar tu implementación con TDD
+- **`src/App.tsx`**: Interfaz visual para interactuar con el juego
 
 ## 🔧 Scripts Principales
 
@@ -136,6 +106,9 @@ pnpm test:ui
 
 # Tests con coverage
 pnpm test:coverage
+
+# Ejecutar tests una sola vez
+pnpm test:run
 ```
 
 ### Calidad de Código
@@ -154,308 +127,15 @@ pnpm format
 pnpm type-check
 ```
 
-### Build y Release
+### Build y Deploy
 
 ```bash
 # Build para producción
 pnpm build
 
-# Build en modo watch
-pnpm build:watch
+# Preview del build de producción
+pnpm preview
 
 # Limpiar archivos generados
 pnpm clean
-
-# Crear changeset para release
-pnpm changeset
-
-# Actualizar versiones
-pnpm version
-
-# Publicar release
-pnpm release
 ```
-
-## 🧪 Testing
-
-### Ejecutar Tests
-
-```bash
-# Tests en modo watch (desarrollo)
-pnpm test
-
-# Ejecutar una vez y salir
-pnpm test:run
-
-# Tests con coverage
-pnpm test:coverage
-
-# Interfaz web para tests
-pnpm test:ui
-```
-
-### Escribir Tests
-
-Los tests se ubican en `src/__tests__/` y siguen la convención de Vitest. Si estás familiarizado con Jest, verás que es muy similar:
-
-```typescript
-import { describe, it, expect } from 'vitest'
-import { myFunction } from '../index'
-
-describe('myFunction', () => {
-  it('should work correctly', () => {
-    expect(myFunction('input')).toBe('expected')
-  })
-})
-```
-
-## 🏗️ Build y Distribución
-
-El proyecto genera builds optimizados para múltiples formatos:
-
-```bash
-# Generar build
-pnpm build
-```
-
-**Output generado:**
-- `dist/index.js` - CommonJS
-- `dist/index.mjs` - ES Modules
-- `dist/index.d.ts` - Tipos TypeScript
-
-## 📦 Gestión de Versiones
-
-Usamos [Changesets](https://github.com/changesets/changesets) para gestión de versiones:
-
-### 1. Crear changeset
-
-```bash
-pnpm changeset
-```
-
-Esto te preguntará:
-- Qué paquetes han cambiado
-- Tipo de cambio (major, minor, patch)
-- Descripción del cambio
-
-### 2. Actualizar versiones
-
-```bash
-pnpm version
-```
-
-### 3. Publicar
-
-```bash
-pnpm release
-```
-
-## 🛠️ Configuración
-
-### TypeScript
-
-La configuración en `tsconfig.json` está optimizada para:
-- ES2022 target
-- Strict mode habilitado
-- Module resolution moderna
-- Soporte para Vitest globals
-
-### Biome
-
-Configuración unificada para linting y formateo en `biome.json`:
-- Reglas recomendadas habilitadas
-- Formateo consistente
-- Organización automática de imports
-
-### Git Hooks
-
-Configurados automáticamente via `simple-git-hooks`:
-- **Pre-commit**: Linting + type checking
-- **Pre-push**: Tests completos
-
-## 🔌 Dependencias y Utilidades Adicionales
-
-### Para Katas de Programación
-
-#### @faker-js/faker - Generación de Datos de Prueba
-```bash
-pnpm add -D @faker-js/faker
-```
-
-Perfecto para generar datos realistas en tests:
-
-```typescript
-import { faker } from '@faker-js/faker'
-
-const user = {
-  name: faker.person.fullName(),
-  email: faker.internet.email(),
-  age: faker.number.int({ min: 18, max: 80 })
-}
-```
-
-#### fast-check - Property-Based Testing
-```bash
-pnpm add -D fast-check
-```
-
-Para tests más robustos que encuentren edge cases automáticamente:
-
-```typescript
-import fc from 'fast-check'
-
-fc.assert(fc.property(fc.integer(), fc.integer(), (a, b) => {
-  expect(add(a, b)).toBe(add(b, a)) // propiedad conmutativa
-}))
-```
-
-### Para Proyectos Profesionales
-
-#### zod - Validación de Esquemas
-```bash
-pnpm add zod
-```
-
-**Altamente recomendado** para validación type-safe:
-
-```typescript
-import { z } from 'zod'
-
-const UserSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  age: z.number().int().positive()
-})
-
-type User = z.infer<typeof UserSchema> // Tipos automáticos
-```
-
-#### @total-typescript/ts-reset - TypeScript Mejorado
-```bash
-pnpm add -D @total-typescript/ts-reset
-```
-
-Mejora los tipos por defecto de TypeScript. Solo añadir al inicio de tu código:
-
-```typescript
-import '@total-typescript/ts-reset'
-```
-
-#### msw - Mock de APIs
-```bash
-pnpm add -D msw
-```
-
-Para testing sin depender de APIs reales:
-
-```typescript
-import { http, HttpResponse } from 'msw'
-import { setupServer } from 'msw/node'
-
-const server = setupServer(
-  http.get('/api/user', () => {
-    return HttpResponse.json({ name: 'John' })
-  })
-)
-```
-
-### Herramientas de Desarrollo
-
-#### size-limit - Monitoreo de Bundle
-```bash
-pnpm add -D size-limit @size-limit/preset-small-lib
-```
-
-Configura en `package.json`:
-
-```json
-{
-  "size-limit": [
-    {
-      "path": "dist/index.js",
-      "limit": "10 KB"
-    }
-  ],
-  "scripts": {
-    "size": "size-limit"
-  }
-}
-```
-
-#### @commitlint/cli - Estandarización de Commits
-```bash
-pnpm add -D @commitlint/cli @commitlint/config-conventional
-```
-
-Crea `commitlint.config.js`:
-
-```javascript
-module.exports = {
-  extends: ['@commitlint/config-conventional']
-}
-```
-
-#### cross-env - Variables de Entorno Cross-Platform
-```bash
-pnpm add -D cross-env
-```
-
-Para scripts que funcionen en todos los sistemas operativos:
-
-```json
-{
-  "scripts": {
-    "build:prod": "cross-env NODE_ENV=production pnpm build"
-  }
-}
-```
-
-### Dependencias por Contexto
-
-#### Para Proyectos Web/API
-```bash
-pnpm add @hono/hono           # Framework web minimalista
-pnpm add drizzle-orm          # ORM type-safe
-pnpm add @t3-oss/env-nextjs   # Validación de env vars
-```
-
-#### Para Proyectos CLI
-```bash
-pnpm add commander  # Parsing de argumentos CLI
-pnpm add chalk      # Colores en terminal
-pnpm add ora        # Spinners de loading
-```
-
-#### Para Manipulación de Datos
-```bash
-pnpm add papaparse  # Parsing de CSV
-pnpm add date-fns   # Manipulación de fechas
-pnpm add lodash-es  # Utilidades funcionales
-```
-
-## 📈 Comparativa con Templates Tradicionales
-
-| Métrica | Template Tradicional | Este Template | Mejora |
-|---------|---------------------|---------------|--------|
-| Instalación | ~45s (npm) | ~18s (pnpm) | 60% más rápido |
-| Build | ~8s (tsc) | ~1.2s (tsup) | 85% más rápido |
-| Tests | ~3.5s (Jest) | ~0.8s (Vitest) | 77% más rápido |
-| Linting | ~2.1s (ESLint+Prettier) | ~0.3s (Biome) | 86% más rápido |
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
-
-## 🎯 Casos de Uso
-
-### Para Katas
-1. Clona el template
-2. Implementa tu solución en `src/index.ts`
-3. Escribe tests en `src/__tests__/`
-4. Ejecuta `pnpm test` para verificar
-
-### Para Proyectos Nuevos
-1. Usa el template como base
-2. Añade dependencias específicas según necesites
-3. Configura CI/CD usando los workflows incluidos
-4. Desarrolla con `pnpm dev` y testea con `pnpm test`
