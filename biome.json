@@ -62,6 +62,15 @@
     },
     "files": {
         "include": ["src/**/*", "*.ts", "*.js", "*.json"],
-        "ignore": ["node_modules", "dist", "coverage", "src/__tests__/*"]
+        "ignore": [
+            "node_modules",
+            "dist",
+            "coverage",
+            "src/__tests__/*",
+            "src/main.tsx",
+            "src/test/setup.ts",
+            "src/test/vitest-setup.d.ts",
+            "vitest.d.ts"
+        ]
     }
 }
