@@ -21,7 +21,7 @@ describe("The world", () => {
 		]);
 	});
 
-	it.skip("gets alive neighbors for a given coordinates", () => {
+	it("gets alive neighbors for a given coordinates", () => {
 		expect(World.createFrom([[Dead]]).aliveNeighbors(0, 0)).toBe(0);
 		expect(World.createFrom([[Alive, Dead]]).aliveNeighbors(0, 1)).toBe(1);
 		expect(World.createFrom([[Dead, Dead]]).aliveNeighbors(0, 1)).toBe(0);
@@ -50,7 +50,7 @@ describe("The world", () => {
 		).toBe(8);
 	});
 
-	it.skip("yields the next state of the game", () => {
+	it("yields the next state of the game", () => {
 		const world = World.createFrom([
 			[Dead, Alive, Dead],
 			[Dead, Alive, Dead],
@@ -66,7 +66,7 @@ describe("The world", () => {
 		]);
 	});
 
-	it.skip("never changes for a given initial block pattern", () => {
+	it("never changes for a given initial block pattern", () => {
 		const world = World.createFrom([
 			[Alive, Alive, Dead, Dead, Dead],
 			[Alive, Alive, Dead, Dead, Dead],
@@ -80,7 +80,7 @@ describe("The world", () => {
 		expect(result).toEqual(world);
 	});
 
-	it.skip("returns to the same state after two generations for a given oscillator pattern", () => {
+	it("returns to the same state after two generations for a given oscillator pattern", () => {
 		const world = World.createFrom([
 			[Dead, Dead, Dead, Dead, Dead],
 			[Dead, Dead, Alive, Dead, Dead],
