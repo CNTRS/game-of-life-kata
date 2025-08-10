@@ -5,7 +5,7 @@ import { World } from '../core/world';
 const { Dead, Alive } = CellStatus;
 
 describe("The world", () => {
-	it.skip("creates a cell matrix for a given cell status", () => {
+	it("creates a cell matrix for a given cell status", () => {
 		const initialStatus = [
 			[Dead, Dead],
 			[Dead, Alive],
